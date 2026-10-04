@@ -1,0 +1,14 @@
+{
+  "state": "completed",
+  "requiredSuites": 10,
+  "passed": 710.0,
+  "failed": 0.0,
+  "errors": 0.0,
+  "skipped": 0.0,
+  "runnerImage": "sha256:edc8ed3801d6efb586b77df0d6e5c72d572aff7bb5d4e307c5f774df1c95ef5e",
+  "harnessRevision": "803560d2a678ace1414465c098eb0ab5380ffade",
+  "resultRevision": "10420119704d374f39452573694d3b1c579e54d0",
+  "officialCommandReceipt": false,
+  "internalNetworkObserved": true,
+  "reportSha256": "8DDB3D717F4E59704A9A465060BD20350C551374FE9F37B15EBA152E4E690D92"
+}

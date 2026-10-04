@@ -2,17 +2,17 @@
 
 Team: Felipe Salvego (Jazz Automations) and Carlos Henrique. Track: **pocketful**.
 
-Everything under `stage-1/` … `stage-4/` was written by the three Band seats in the room recorded in `room.json`, from one human dispatch, with no human message afterwards. The humans wrote this file, `FACTORY.md` and the mandates.
+Everything under `stage-1/` … `stage-4/` was written by the three Band seats in the room recorded in `room.json`, from one human dispatch, with no human message afterwards. These documentation files and mandates were prepared separately from the generated stage source. This branch is a documentation and evidence review; maintainer review is pending.
 
 ## How to read this repository
 
 | Path | What it is |
 |---|---|
-| `FACTORY.md` | The factory: seats, setup, design choices, measured time and token spend, how bad work is caught |
-| `mandates/` | One generic mandate per seat (`coordinator.md`, `implementer.md`, `reviewer.md`), each starting with the harness and model it ran |
+| `FACTORY.md` | The factory: seats, setup, design choices, recorded timing, reported token estimates and evidence limits, how bad work is caught |
+| `mandates/` | One generic mandate per seat (`coordinator.md`, `implementer.md`, `reviewer.md`), each starting with the configured harness and model |
 | `room.json` | Full session download of the room, unchanged |
 | `stage-N/` | The service as accepted at stage N: `Dockerfile`, `RUN.md`, source. Each folder builds and runs on its own |
-| `tools/factory/` | `seat.py`, `start.sh`, `dispatch.py`, `usage.py`: the scripts that ran the seats and measured the run |
+| `tools/factory/` | `seat.py`, `start.sh`, `dispatch.py`, `usage.py`: seat orchestration and audit scripts; see FACTORY.md for usage-data limits |
 | `docs/dispatch.txt` | The single human dispatch, verbatim |
 
 ## Run a stage
@@ -32,11 +32,18 @@ python -m harness run --track pocketful --repo <clone> --all --mode isolated
 
 ## Result of the submitted run
 
-| Stage | Accepted at | Shipped checks (isolated) |
-|---|---|---|
-| 1 | +24 min | 147/147 |
-| 2 | +45 min | 147/147, 35/35 |
-| 3 | +62 min | 147/147, 35/35, 6/6 |
-| 4 | +76 min | 147/147, 35/35, 6/6, 5/5 |
+| Stage folder | Required shipped-suite checks independently reproduced |
+|---|---|
+| 1 | 147/147 |
+| 2 | 182/182 (147 + 35) |
+| 3 | 188/188 (147 + 35 + 6) |
+| 4 | 193/193 (147 + 35 + 6 + 5) |
 
-Reviewer rejections: 0. Human messages after dispatch: 0. Details and token usage per seat in `FACTORY.md`.
+A separate supplementary reproduction at result revision `1042011`, with unchanged organiser suites at `803560d2`, passed all 710 required checks with no failure, error or skip. The three next-stage overshoot probes failed as expected. Services ran in an internal Docker network with the official 2 CPU / 2 GiB limits, and upgrade tests used the genuine preceding stage service. This is not a receipt for the exact official all-stage CLI command. The logs and provenance are in [docs/validation](docs/validation/README.md). Shipped checks do not establish hidden-test coverage or a judging score.
+
+Reviewer rejections: 0. Human messages after dispatch: 0. Recorded timing, reported usage estimates and their limits are in `FACTORY.md`. Final team registration and submission are not established by this repository.
+
+
+## Reviewed media
+
+The original video and slides remain in docs/. The corrected [video](docs/video-factory-run-corrected.mp4) replaces the original closing summary and retains the preceding room/app sequence with normal video re-encoding. [Evidence-review slides](docs/slides-evidence-review.pdf) contain updated counts and timing, with missing usage counters disclosed. The original recording remains intact. [Edit provenance](docs/validation/video-correction-receipt.json) records source/output hashes and validation scope. These are review artifacts, not proof of final submission or Desktop-footage eligibility.

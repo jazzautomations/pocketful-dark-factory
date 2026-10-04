@@ -1,0 +1,17 @@
+{
+  "schema_version": "band-export-audit.v1",
+  "source_sha256": "c1f57d26e77ff634d8bf6463474a9eafcbe5a3990f5a447c33e9e2cca982386b",
+  "message_count": 556,
+  "human_message_count": 1,
+  "human_messages_after_dispatch": 0,
+  "dispatch_at": "2026-10-04T20:53:18.700000+00:00",
+  "last_event_at": "2026-10-04T22:07:11.968000+00:00",
+  "dispatch_to_last_event_seconds": 4433.268,
+  "room_interval_seconds": 4540.414,
+  "duration_scope": "first human message to last exported event; not independently identified final report",
+  "usage": {
+    "status": "unavailable",
+    "reason": "no_usage_events_in_export",
+    "recorded_event_count": 0
+  }
+}

@@ -1,24 +1,76 @@
-"""Resumo de uso por seat e tempo por stage a partir do dump da room (API)."""
-import json, sys, collections
-from datetime import datetime
-d=json.load(open(sys.argv[1]))["messages"]; d.sort(key=lambda m:m["inserted_at"])
-use=collections.defaultdict(lambda: collections.Counter()); turns=collections.Counter()
-for m in d:
-    md=m.get("metadata") or {}
-    bu=md.get("band_usage") if isinstance(md,dict) else None
-    if bu:
-        turns[m["sender_name"]]+=1
-        for k,v in bu.items():
-            if isinstance(v,(int,float)): use[m["sender_name"]][k]+=v
-t0=datetime.fromisoformat(d[0]["inserted_at"].replace("Z","+00:00"))
-print("dispatch:", d[0]["inserted_at"][:19], "| messages:", len(d))
-for m in d:
-    c=m["content"] or ""
-    if m["message_type"]=="text" and m["sender_type"]=="Agent" and c.startswith("@[[9da0") and "ACCEPTED" in c[:120]:
-        t=datetime.fromisoformat(m["inserted_at"].replace("Z","+00:00"))
-        print(f"  {c.split(chr(8212))[0].strip()[-20:]:>20} at +{int((t-t0).total_seconds()//60)} min")
-rej=[m for m in d if m["message_type"]=="text" and m["sender_name"]=="reviewer" and (m["content"] or "")[:200].count("REJECT")]
-print("reviewer REJECT messages:", len(rej))
-for s,c in use.items():
-    print(f"{s:12} turns={turns[s]:3} " + " ".join(f"{k}={v:,}" for k,v in sorted(c.items())))
-print("seat text messages:", collections.Counter(m["sender_name"] for m in d if m["message_type"]=="text" and m["sender_type"]=="Agent"))
+"""Read timing evidence from an unchanged BAND export; never invent usage."""
+from datetime import datetime, timezone
+import hashlib
+import json
+from pathlib import Path
+import sys
+
+
+def field(message, camel, snake):
+    if camel in message and snake in message and message[camel] != message[snake]:
+        raise ValueError('conflicting export field aliases')
+    value = message.get(camel, message.get(snake))
+    if not isinstance(value, str) or not value:
+        raise ValueError('missing or invalid export field: '+camel)
+    return value
+
+
+def audit(raw):
+    document = json.loads(raw.decode('utf-8-sig'))
+    messages = document.get('messages') if isinstance(document, dict) else None
+    if not isinstance(messages, list) or not messages:
+        raise ValueError('export must contain a nonempty messages array')
+    timed = []
+    usage_events = 0
+    for message in messages:
+        if not isinstance(message, dict):
+            raise ValueError('invalid message record')
+        stamp = field(message, 'insertedAt', 'inserted_at')
+        instant = datetime.fromisoformat(stamp.replace('Z', '+00:00'))
+        if instant.tzinfo is None or instant.utcoffset() is None:
+            raise ValueError('every timestamp must include a timezone')
+        sender = field(message, 'senderType', 'sender_type')
+        metadata = message.get('metadata') or {}
+        if not isinstance(metadata, dict):
+            raise ValueError('invalid message metadata')
+        usage_events += int('band_usage' in metadata)
+        timed.append((instant.astimezone(timezone.utc), sender))
+    timed.sort(key=lambda item: item[0])
+    humans = [t for t,s in timed if s.lower() == 'user']
+    if not humans:
+        raise ValueError('no human dispatch recorded; autonomy cannot be established')
+    dispatch = humans[0]
+    return {
+        'schema_version': 'band-export-audit.v1',
+        'source_sha256': hashlib.sha256(raw).hexdigest(),
+        'message_count': len(messages),
+        'human_message_count': len(humans),
+        'human_messages_after_dispatch': len(humans)-1,
+        'dispatch_at': dispatch.isoformat(),
+        'last_event_at': timed[-1][0].isoformat(),
+        'dispatch_to_last_event_seconds': (timed[-1][0]-dispatch).total_seconds(),
+        'room_interval_seconds': (timed[-1][0]-timed[0][0]).total_seconds(),
+        'duration_scope': 'first human message to last exported event; not independently identified final report',
+        'usage': {
+            'status': 'unavailable',
+            'reason': 'counter_semantics_not_verified' if usage_events else 'no_usage_events_in_export',
+            'recorded_event_count': usage_events,
+        },
+    }
+
+
+def main():
+    if len(sys.argv) != 2:
+        print('Usage: python usage.py room.json', file=sys.stderr)
+        return 2
+    try:
+        result = audit(Path(sys.argv[1]).read_bytes())
+    except (OSError, ValueError, TypeError) as exc:
+        print('Export audit failed: '+str(exc), file=sys.stderr)
+        return 2
+    print(json.dumps(result, indent=2, ensure_ascii=True))
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

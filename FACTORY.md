@@ -6,7 +6,7 @@ This document is enough to stand the factory up again on a plain Linux VM and po
 
 Three seats, one room, one dispatch.
 
-| Seat | Owns | Harness | Model |
+| Seat | Owns | Harness | Configured model |
 |---|---|---|---|
 | `coordinator` | scope, sequencing, complete handoffs, acceptance, reporting | Claude Code (headless, via `band-sdk` `ClaudeSDKAdapter`) | `claude-sonnet-5-5` |
 | `implementer` | one scoped item at a time, builds and self-checks, commits, reports the hash | Claude Code (headless) | `claude-opus-5-5` |
@@ -14,9 +14,11 @@ Three seats, one room, one dispatch.
 
 The seats are Band **external agents**. Each one is a Python process running `seat.py`: the Band SDK keeps the WebSocket to the room, and every message addressed to the seat becomes one Claude Code turn with the seat's mandate as its system section. There is no Band Desktop, no GUI and no human in the loop after the dispatch. Seats only receive messages that mention them, so the coordinator is the only seat that ever sees the human dispatch, and every handoff must carry the whole task and the whole specification (the mandates enforce this).
 
+Configured model IDs describe the mandates and adapter setup. They are not independent evidence of the effective model used by every runtime. The final room report leaves implementer/reviewer model identities unknown. Runtime records are needed to resolve that limit.
+
 ## 2. Setup (about 15 minutes)
 
-Host used: Oracle Cloud VM, x86-64, 4 vCPU, 5.8 GiB RAM, Ubuntu 24.04, Docker 29. A 37 GiB ARM host was prepared as a fallback and not needed.
+Host reported by the operators: Oracle Cloud VM, x86-64, 4 vCPU, 5.8 GiB RAM, Ubuntu 24.04, Docker 29. A 37 GiB ARM host was prepared as a fallback and not needed.
 
 ```sh
 # 1. Claude Code CLI, logged in (subscription)
@@ -63,33 +65,36 @@ The dispatch is the only human input. Ours named the track, the absolute paths o
 
 ## 4. What the room shows (the run we submit)
 
-Measured from `room.json` (every number below is in the file; `tools/factory/usage.py` recomputes them):
+The unchanged official full-session export contains 556 events: 555 agent events and one human dispatch. No later human message appears in the export.
 
-| | |
+| Recorded event | UTC timestamp |
 |---|---|
-| Dispatch | 2026-10-04 20:51 UTC |
-| Stage 1 accepted | +24 min |
-| Stage 2 accepted | +45 min |
-| Stage 3 accepted | +62 min |
-| Stage 4 accepted | +76 min (final report 22:07 UTC) |
-| Rejections by the reviewer | 0 (every stage accepted on first review) |
-| Human messages after the dispatch | 0 |
+| First setup event | 2026-10-04 20:51:31.554 |
+| Human dispatch | 2026-10-04 20:53:18.700 |
+| Coordinator final text report | 2026-10-04 22:07:03.747 |
+| Last exported event | 2026-10-04 22:07:11.968 |
 
-Token usage reported by the seats into the room (`band_usage` events, cumulative over the run):
+Dispatch to final text report: 73 minutes 45.047 seconds. Dispatch to last event: 73 minutes 53.268 seconds. The full room interval is 75 minutes 40.414 seconds (approximately 76 minutes), including setup. The reviewer accepted each stage on first review; there was no rejection episode to demonstrate a recovery loop.
 
-| Seat | Turns | Output tokens | Cache writes | Cache reads |
+The current room export contains no `metadata.band_usage` records. The coordinator's final report explicitly says token usage was unknown. The published original usage.py expects different field names and cannot recompute the token table from this export. The proposed replacement can audit event counts and timing; it intentionally does not infer token usage from context remaining or sum counters whose semantics are unknown.
+
+The following figures were reported by the run operators, and are not independently supported by the current public room export:
+
+| Seat | Reported turns | Reported output tokens | Reported cache writes | Reported cache reads |
 |---|---|---|---|---|
 | coordinator | 9 | 123,280 | 182,555 | 4,127,192 |
 | implementer | 18 | 180,625 | 347,262 | 21,347,966 |
 | reviewer | 18 | 101,925 | 261,334 | 13,553,339 |
 
-Cost: the seats ran on a Claude subscription, so there is no per-token invoice; the table above is the measured spend. The adapter's own per-turn estimate at list prices (logged as `Complete - <ms>, $<cost>` in each seat's log) sums to coordinator $14.14, implementer $99.54, reviewer $62.52: about **$176 for the whole run**, 76 minutes of wall clock.
+Reported adapter estimates at list prices: coordinator USD 14.14, implementer USD 99.54, reviewer USD 62.52; total USD 176.20. The seats used subscription access. This estimate is not an invoice. Sanitized original per-seat logs, runtime/session identity and counter semantics must accompany any claim that these counters are independently measured.
+
+Independent supplementary reproduction of the unchanged shipped suites passed all 710 required checks across the four frozen stage folders (147, 182, 188 and 193). No required-suite failure, error or skip; all three next-stage overshoot probes failed as expected. Each service used the official resource limits on an internal Docker network, with genuine preceding-stage services for upgrade checks. This result is separate from the exact official all-stage CLI attempt, which hit runner dependency-download issues before collecting tests. It does not establish hidden-test coverage or factory eligibility.
 
 ## 5. Design choices and what they cost
 
 - **Headless seats instead of Band Desktop.** We could not run Band Desktop on any of our machines. The SDK adapter gives the same room semantics (addressed messages, `@handle` mentions, tool-call and usage events) and runs on a server. Cost: we had to write `seat.py` and read the adapter source; no documentation covers the Claude Code adapter in detail.
-- **Full specification in every handoff.** Seats cannot read the room, so the coordinator pastes the complete task and the complete spec of every stage so far into each handoff, split into numbered parts when needed (the stage 2 handoff was 4 parts). Cost: large prompts, visible in the cache-write numbers; benefit: the implementer and reviewer never work from a summary.
-- **Reviewer reproduces, never trusts.** The reviewer exports the exact revision with `git archive`, builds from the Dockerfile, follows `RUN.md`, runs the official harness in isolated mode with a fresh output directory, and then probes the spec clauses the shipped checks never touch (concurrency races, rounding, error precedence, restarts, earlier stages still holding). Cost: the reviewer spends as many tokens as the implementer; benefit: acceptance means something.
+- **Full specification in every handoff.** Seats cannot read the room, so the coordinator pastes the complete task and the complete spec of every stage so far into each handoff, split into numbered parts when needed (the stage 2 handoff was 4 parts). Cost: large prompts; the reported cache-write totals still require original usage records; benefit: the implementer and reviewer never work from a summary.
+- **Reviewer reproduces, never trusts.** The reviewer exports the exact revision with `git archive`, builds from the Dockerfile, follows `RUN.md`, runs the official harness in isolated mode with a fresh output directory, and then probes the spec clauses the shipped checks never touch (concurrency races, rounding, error precedence, restarts, earlier stages still holding). Cost: independent review adds execution and model usage; the reported per-seat counters remain unverified; benefit: acceptance means something.
 - **Opus for the two seats that touch code, Sonnet for coordination.** The coordinator's job is sequencing and faithful copying; the implementer and reviewer need the stronger model to read a 25 KB specification and find what the sample checks do not ask.
 - **Permission mode `auto`, not bypass.** Claude Code's own permission policy evaluates each tool call. It never blocked a build, a test or a commit during the run.
 
@@ -110,3 +115,10 @@ Cost: the seats ran on a Claude subscription, so there is no per-token invoice; 
 ## 8. Pointing it at something else
 
 Replace the dispatch text (paths, check command, folder rule). The mandates say nothing about wallets, reservations or counters; they say how a coordinator, an implementer and a reviewer work. We rehearsed on the organiser's `toy` track first: one dispatch, stage 1 accepted in two minutes, `harness check` gates 1, 2 and 4 green, before touching the real track.
+
+## 9. Submission evidence still required
+
+Before final submission, the maintainers must confirm documentation authorship and review, apply an actual rights-holder-approved MIT license, provide reproducible usage records or explicitly retain the unknown status, correct equivalent timing/usage claims in the slides and video, and complete team registration. The video currently shows the BAND console; the event wording calls for BAND Desktop room footage. SDK cloud seats are allowed, but footage equivalence requires organiser clarification or compliant footage. Do not manufacture missing run evidence or insert counters into the original room export.
+
+
+Independent reproduction reports, room timing audit and corrected-media provenance are in [docs/validation](docs/validation/README.md). Original media is retained alongside corrected review derivatives.

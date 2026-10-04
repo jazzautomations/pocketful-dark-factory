@@ -1,0 +1,20 @@
+{
+  "source": "docs/video-factory-run.mp4",
+  "source_sha256": "46c8bcadb2a002c0b6aa642cda522c34a912bfa87e193a371265d827404364b9",
+  "output": "docs/video-factory-run-corrected.mp4",
+  "output_sha256": "25c519f21284ea682ddc494399710fce6f4519e91993d65431a71ebaa372c926",
+  "edit": "Replace only original closing summary from 218.56 seconds. Preserve preceding room/app sequence; normal H264 re-encoding. Original source file retained unchanged.",
+  "card_seconds": 12,
+  "expected_duration_seconds": 230.56,
+  "audio": "Original contains no audio; output contains no audio.",
+  "eligibility": "BAND Desktop-footage equivalence remains unresolved. No new or replayed room evidence inserted.",
+  "validation": {
+    "decode_all_frames_returncode": 0,
+    "sample_at_180_seconds_mean_pixel_difference": [
+      0.10030164930555556,
+      0.083408203125,
+      0.11167100694444444
+    ],
+    "scope": "Full decode and one preserved-footage frame comparison; not a claim of pixel-identical full video."
+  }
+}
