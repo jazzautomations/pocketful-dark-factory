@@ -1,7 +1,7 @@
 """Seat headless do Band: Claude Code dirigido pelo ClaudeSDKAdapter do band-sdk.
 
-Permissões escopadas (sem bypassPermissions): modo acceptEdits + allowlist de
-ferramentas, cwd preso ao repo de resultado, timeout por turno, sem settings do host.
+Permissões escopadas (sem bypassPermissions): modo AUTO; as constantes de allowlist de
+ferramentas abaixo não são aplicadas. cwd no repo de resultado, timeout por turno, sem settings do host.
 
 Env: SEAT_NAME, AGENT_ID, AGENT_KEY, MANDATE_FILE, SEAT_CWD, SEAT_MODEL,
      GIT_NAME, GIT_EMAIL, SEAT_TURN_TIMEOUT

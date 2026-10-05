@@ -25,7 +25,7 @@ Host reported by the operators: Oracle Cloud VM, x86-64, 4 vCPU, 5.8 GiB RAM, Ub
 curl -fsSL https://claude.ai/install.sh | bash && claude   # /login once
 
 # 2. Band SDK with the Claude Code adapter, plus the Band MCP server for the human side
-python3 -m venv ~/band-venv && ~/band-venv/bin/pip install "band-sdk[claude-sdk]" band-mcp mcp
+python3 -m venv ~/band-venv && ~/band-venv/bin/pip install "band-sdk[claude-sdk]" band-mcp "mcp<2"
 
 # 3. Three external agents on app.band.ai (Agents -> New Agent -> External). Keep the keys outside git:
 #    ~/.config/band/env        BAND_BASE_URL, BAND_USER_KEY (human key, used only to create the room and send the dispatch)
@@ -57,8 +57,8 @@ Each seat commits under its own git identity, so the history shows who did what 
 ## 3. Running a job
 
 ```sh
-tools/factory/start.sh <dir with mandates/> <absolute result repo>     # starts the three seats (nohup, one log each)
-tools/factory/dispatch.py <room id> <dispatch.txt>                     # one message, mentions only the coordinator
+bash tools/factory/start.sh <mandates directory or factory workspace> <absolute result repo>     # starts the three seats (nohup, one log each)
+~/band-venv/bin/python tools/factory/dispatch.py <room id> <dispatch.txt>                     # one message, mentions only the coordinator
 ```
 
 The dispatch is the only human input. Ours named the track, the absolute paths of the specifications and the result repository, the check command, the folder-per-stage rule and the acceptance flow, and told the coordinator to run all four stages in order. After that we read the room and did nothing else.
@@ -118,7 +118,9 @@ Replace the dispatch text (paths, check command, folder rule). The mandates say 
 
 ## 9. Submission evidence still required
 
-Before final submission, the maintainers must confirm documentation authorship and review, apply an actual rights-holder-approved MIT license, provide reproducible usage records or explicitly retain the unknown status, correct equivalent timing/usage claims in the slides and video, and complete team registration. The video currently shows the BAND console; the event wording calls for BAND Desktop room footage. SDK cloud seats are allowed, but footage equivalence requires organiser clarification or compliant footage. Do not manufacture missing run evidence or insert counters into the original room export.
+Before final submission, the maintainers must confirm documentation authorship and review, retain the approved MIT license and third-party notices, provide reproducible usage records or explicitly retain the unknown status, correct equivalent timing/usage claims in the slides and video, and complete team registration. The video currently shows the BAND console; the event wording calls for BAND Desktop room footage. SDK cloud seats are allowed, but footage equivalence requires organiser clarification or compliant footage. Do not manufacture missing run evidence or insert counters into the original room export.
 
 
 Independent reproduction reports, room timing audit and corrected-media provenance are in [docs/validation](docs/validation/README.md). Original media is retained alongside corrected review derivatives.
+
+The launcher was repaired after the run to use the adjacent seat.py, the documented band-venv, quoted paths and preflight checks for all three mandates and identities. These repairs are not evidence of the exact launcher used during the scored run. Launcher tests cover preflight behavior without starting workers; a fresh end-to-end factory run has not been performed with this revision.

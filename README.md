@@ -47,3 +47,8 @@ Reviewer rejections: 0. Human messages after dispatch: 0. Recorded timing, repor
 ## Reviewed media
 
 The original video and slides remain in docs/. The corrected [video](docs/video-factory-run-corrected.mp4) replaces the original closing summary and retains the preceding room/app sequence with normal video re-encoding. [Evidence-review slides](docs/slides-evidence-review.pdf) contain updated counts and timing, with missing usage counters disclosed. The original recording remains intact. [Edit provenance](docs/validation/video-correction-receipt.json) records source/output hashes and validation scope. These are review artifacts, not proof of final submission or Desktop-footage eligibility.
+
+
+## License
+
+Project source is licensed under [MIT](LICENSE), with copyright 2026 Jazz Automations and acarloshenrique. Separately installed runtimes and provider tools retain their own licenses and terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
