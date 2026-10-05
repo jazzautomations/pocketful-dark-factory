@@ -1,5 +1,13 @@
 # Independent evidence review
 
+## Exact official CLI passed — 5 October 2026
+
+The exact `python -m harness run --track pocketful --repo <fresh-public-clone> --all --mode isolated --out <fresh-output>` completed with exit 0 at review revision `b493eb4fdfd74b98e2561a7c8cea80526eb18b25`. Unchanged organiser harness: `803560d2a678ace1414465c098eb0ab5380ffade`. Four folders claimed their stages on the shipped public suites: 147, 182, 188 and 193 cumulative checks, 710 total required checks across 10 suite executions, no required failure/error/skip/deselection/xfailed. Genuine previous-stage folders supplied upgrade services. Expected next-stage overshoot failures remain separate from required suites.
+
+[official-cli-run-20261005.json](official-cli-run-20261005.json) audits all counts, source identities, clean public clones, unchanged frozen stage source/mandates/room, upgrade sources and cleanup. [official-cli-run-20261005.zip](official-cli-run-20261005.zip) retains commands, controller setup, raw reports/logs, successful output and the failed network-none attempt preceding the retry. The controller needed Git and build-client registry egress; the test services remain in the unchanged official isolated driver. A separate late live resource inspection found the network already removed, so the resource-limit claim for this attempt is tied to the pinned driver code, not a fabricated live measurement.
+
+This is independent post-run application validation, not another BAND collaboration or provider-usage measurement. Public preview suites do not prove hidden tests, factory footage eligibility or a judging score. Previous supplementary reports and failed exact-CLI attempts below remain historical evidence; do not sum repeated runs into a unique test count. Original reviewed media predates this new receipt and is not a recording of this validation.
+
 The reviewed generated source is revision 10420119704d374f39452573694d3b1c579e54d0. Official organiser harness revision: 803560d2a678ace1414465c098eb0ab5380ffade. No stage source, mandate or room export changed in this branch.
 
 The supplementary reproduction builds all four stage folders and runs every required preceding suite against each folder, with genuine preceding-stage services for upgrade tests. It uses the unchanged shipped tests, the existing df-harness-runner image, an internal Docker network, and official 2 CPU / 2 GiB service limits. All 10 required suite executions pass: 147 + 182 + 188 + 193 = 710 checks, with no failure, error, skip or deselection. All three next-stage overshoot probes fail as expected.
@@ -10,7 +18,7 @@ room-audit.json records event counts, source hash and time intervals from the of
 
 The original video is retained in docs/video-factory-run.mp4. The corrected derivative replaces only the closing summary from 218.56 seconds, with normal H264 re-encoding of the preceding sequence. Full decode succeeds; a frame comparison at 180 seconds checks sampled content preservation, not full pixel identity. video-correction-receipt.json provides hashes and the validation scope.
 
-Pending before final submission: maintaining the approved MIT license and third-party notices, reproducible original usage records or explicit unknown status, effective runtime/model identities, maintainer review, teammate acceptance, media uploads and actual submission receipt. Event wording requires BAND Desktop room footage; web-console equivalence remains unresolved. No missing evidence was manufactured or inserted into room.json.
+Pending before final submission: maintaining the approved MIT license and third-party notices, reproducible original usage records or explicit unknown status, effective runtime/model identities, maintainer review, required media attachments and actual submission receipt. Carlos and Felipe are observed as members in Pocketful; see [the draft UI observation](lablab-draft-observation-20261005.json). Event wording requires BAND Desktop room footage; web-console equivalence remains unresolved. No missing evidence was manufactured or inserted into room.json.
 
 The project owners approved MIT licensing with copyright 2026 Jazz Automations and acarloshenrique on 4 October 2026. LICENSE and THIRD_PARTY_NOTICES.md implement that approval. The factory setup now documents the legacy MCP client API compatibility bound; this is a post-run reproduction correction, not an assertion of the original installed dependency versions.
 

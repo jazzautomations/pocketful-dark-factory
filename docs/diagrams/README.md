@@ -51,7 +51,7 @@ Dispatch to final text report: **73 minutes 45.047 seconds**. Full room interval
 
 ## Validation boundaries
 
-The separate post-run reproduction passed 147, 182, 188 and 193 required shipped checks across stage folders: 710 cumulative checks, including repeated inherited suites. The exact official all-stage CLI attempt failed during runner dependency setup. These are different outcomes, preserved in [../validation/README.md](../validation/README.md); neither establishes hidden-test coverage or a judging result.
+The separate post-run reproduction passed 147, 182, 188 and 193 required shipped checks across stage folders: 710 cumulative checks, including repeated inherited suites. An earlier exact official all-stage CLI attempt failed during runner dependency setup. On 5 October the exact all-stage command independently passed from fresh public clones at review revision `b493eb4`, with 710 cumulative required checks and exit 0. The [official receipt](../validation/official-cli-run-20261005.json) and previous failures are preserved separately; none establishes hidden-test coverage or a judging result. These 710 checks repeat the same shipped contracts; do not add two runs together as unique coverage.
 
 ## Retained operator illustrations
 

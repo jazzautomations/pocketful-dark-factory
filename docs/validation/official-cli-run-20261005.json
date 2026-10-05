@@ -1,0 +1,180 @@
+{
+  "kind": "independent_post_run_official_cli_validation",
+  "observed_at": "2026-10-05T13:02:29.080573+00:00",
+  "state": "completed",
+  "exit_code": 0,
+  "harness_revision": "803560d2a678ace1414465c098eb0ab5380ffade",
+  "result_revision": "b493eb4fdfd74b98e2561a7c8cea80526eb18b25",
+  "frozen_product_source_revision": "10420119704d374f39452573694d3b1c579e54d0",
+  "fresh_public_clones": true,
+  "clones_clean_after_run": true,
+  "stage_source_mandates_room_unchanged": true,
+  "room_sha256": "2c169b98bb8e4a48f9b41508d3bc878e988bf5af49b3de94dee9d27c0505328c",
+  "official_command_receipt": true,
+  "mode": "isolated",
+  "preview_public_suites_only": true,
+  "required_suite_executions": 10,
+  "required_cumulative_passed": 710,
+  "required_failed": 0,
+  "required_errors": 0,
+  "required_skipped": 0,
+  "required_deselected": 0,
+  "folders": [
+    {
+      "folder": 1,
+      "required_passed": 147,
+      "required_failures_errors_skips_deselections": 0,
+      "claimed": true,
+      "upgrade_sources": {
+        "2": {
+          "folder": "/run/desktop/mnt/host/c/Users/Carlos IA/pocketful-official-validation-20261005/result/stage-1",
+          "revision": "b493eb4fdfd74b98e2561a7c8cea80526eb18b25"
+        }
+      },
+      "report": "official-all-v2/stage-1/report.json"
+    },
+    {
+      "folder": 2,
+      "required_passed": 182,
+      "required_failures_errors_skips_deselections": 0,
+      "claimed": true,
+      "upgrade_sources": {
+        "2": {
+          "folder": "/run/desktop/mnt/host/c/Users/Carlos IA/pocketful-official-validation-20261005/result/stage-1",
+          "revision": "b493eb4fdfd74b98e2561a7c8cea80526eb18b25"
+        },
+        "3": {
+          "folder": "/run/desktop/mnt/host/c/Users/Carlos IA/pocketful-official-validation-20261005/result/stage-2",
+          "revision": "b493eb4fdfd74b98e2561a7c8cea80526eb18b25"
+        }
+      },
+      "report": "official-all-v2/stage-2/report.json"
+    },
+    {
+      "folder": 3,
+      "required_passed": 188,
+      "required_failures_errors_skips_deselections": 0,
+      "claimed": true,
+      "upgrade_sources": {
+        "2": {
+          "folder": "/run/desktop/mnt/host/c/Users/Carlos IA/pocketful-official-validation-20261005/result/stage-1",
+          "revision": "b493eb4fdfd74b98e2561a7c8cea80526eb18b25"
+        },
+        "3": {
+          "folder": "/run/desktop/mnt/host/c/Users/Carlos IA/pocketful-official-validation-20261005/result/stage-2",
+          "revision": "b493eb4fdfd74b98e2561a7c8cea80526eb18b25"
+        },
+        "4": {
+          "folder": "/run/desktop/mnt/host/c/Users/Carlos IA/pocketful-official-validation-20261005/result/stage-3",
+          "revision": "b493eb4fdfd74b98e2561a7c8cea80526eb18b25"
+        }
+      },
+      "report": "official-all-v2/stage-3/report.json"
+    },
+    {
+      "folder": 4,
+      "required_passed": 193,
+      "required_failures_errors_skips_deselections": 0,
+      "claimed": true,
+      "upgrade_sources": {
+        "2": {
+          "folder": "/run/desktop/mnt/host/c/Users/Carlos IA/pocketful-official-validation-20261005/result/stage-1",
+          "revision": "b493eb4fdfd74b98e2561a7c8cea80526eb18b25"
+        },
+        "3": {
+          "folder": "/run/desktop/mnt/host/c/Users/Carlos IA/pocketful-official-validation-20261005/result/stage-2",
+          "revision": "b493eb4fdfd74b98e2561a7c8cea80526eb18b25"
+        },
+        "4": {
+          "folder": "/run/desktop/mnt/host/c/Users/Carlos IA/pocketful-official-validation-20261005/result/stage-3",
+          "revision": "b493eb4fdfd74b98e2561a7c8cea80526eb18b25"
+        }
+      },
+      "report": "official-all-v2/stage-4/report.json"
+    }
+  ],
+  "networks_removed": [
+    {
+      "name": "df-run-78b6aa786fd6458fa81ca4025167a006",
+      "absent_after_run": true
+    },
+    {
+      "name": "df-run-81f1e42b5a10407cbd8c7ad56dc43868",
+      "absent_after_run": true
+    },
+    {
+      "name": "df-run-18ff11a399a5407295db7021f9619e44",
+      "absent_after_run": true
+    },
+    {
+      "name": "df-run-25152b7ce3f5435fb0e3cfe1688b0292",
+      "absent_after_run": true
+    }
+  ],
+  "controller_removed": true,
+  "runtime_resource_scope": "2 vCPU/2 GiB and internal networks prescribed by unchanged official driver; no successful separate live resource inspection in this attempt",
+  "build_client_network": "bridge for registry/build access; service tests remain isolated",
+  "harness_checkout_policy": "clean Git checkout with core.autocrlf=true; no code/test modifications",
+  "effective_provider_usage": "not measured by this application validation",
+  "new_band_run": false,
+  "hidden_test_coverage": "not established",
+  "factory_footage_eligibility": "not established",
+  "archive_sha256": "e221b5eb36d7e7312c0f87ee48fbabf5ee1dbc5e47e45b47015e1f167c85c1ab",
+  "archive_file_hashes": {
+    "outputs/controller-build.log": "123783a61e0b9c14f87a011c8893007ef7936aaefcbf13736eca8b47ae49f03b",
+    "outputs/controller-receipt-v2.json": "58848005ebc73c0889c741d5f414f457104c42456256f875db240587dd94fb12",
+    "outputs/controller-receipt.json": "574b969aaf2e03c1e27b56a4c0bba6c334e32b2375d777a2c8ae8deee2867b92",
+    "outputs/harness-checkout-policy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "outputs/harness-checkout.log": "04255ecfb19836d09710bc714326afae87bcf07079dd5ab060c27922f5f76575",
+    "outputs/harness-clone.log": "d1bb0ee9e5e1d87c9eec4260eca52b541515c268f076aa0d569af3bcbd187cd8",
+    "outputs/official-all/stage-1/report.json": "69e696f156febba23502576b847c3e5b6215fc05b957a8b79814d4b6159cf42b",
+    "outputs/official-all/stage-1/startup.log": "ce828ca0f8a80bde28d6a2e412ab44f87e4f493966ba1d4816fd0002a42c1d8c",
+    "outputs/official-all/stage-2/report.json": "403dc9a4453a6f6c5e1bb4d23d2ae8fe49f232940ccca15657857aa071542b7b",
+    "outputs/official-all/stage-2/startup.log": "f0453ab861bb8210003a956cdfb65c3c753504d9c6b099309f97afc83a61fed9",
+    "outputs/official-all/stage-3/report.json": "daae07531e69345494f470b0def6005e38f4ce6233a13831cb7873eafa60b036",
+    "outputs/official-all/stage-3/startup.log": "70d7bf81ea3ca21e960a5e530f67eec9adf02ace8a59f1387d5178d61ccf4d2b",
+    "outputs/official-all/stage-4/report.json": "802cd2f4aeeea2bdda8a29c7e7e502a2603bc67505c56b08a4a631d783846c5b",
+    "outputs/official-all/stage-4/startup.log": "7d17c5cecb6492beb6d0bc00f81be6a7ccaa1597fa57010cf5524545bddf997e",
+    "outputs/official-all/summary.json": "091ccf943d433282ec1d0c3cd4334a7e3162ddc8b7755f343c7a3f1126a941e7",
+    "outputs/official-all-v2/stage-1/report.json": "7b537859ffbdb6d3342103e46a3f95fe6d04836abe1244e0fad1a0ee566b91c2",
+    "outputs/official-all-v2/stage-1/stage-1.counts.json": "6250f0fd1251afe620a1f77f720deecc44479bd1466308da32a9204809c34546",
+    "outputs/official-all-v2/stage-1/stage-1.log": "cacc3613edaffd35e2f86d9191a6f7ee5cb6cf4441cae918377111f20f6891e4",
+    "outputs/official-all-v2/stage-1/stage-2.counts.json": "90b4dc218af51de9881738903b587a49bc5b2cb8b8c9e3d162ad24e034c956cd",
+    "outputs/official-all-v2/stage-1/stage-2.log": "02ad51177a0a976a334858dedd22569f7e4536dcfbbdf5a180d839a62ecd5ae6",
+    "outputs/official-all-v2/stage-2/report.json": "0c4b130ae6073a8cdb88b969eafae891fa400337591b68726bd109aca5d3e200",
+    "outputs/official-all-v2/stage-2/stage-1.counts.json": "6250f0fd1251afe620a1f77f720deecc44479bd1466308da32a9204809c34546",
+    "outputs/official-all-v2/stage-2/stage-1.log": "b72e65a46756c0b04bdbe0ad073d964ffa66668798d420a43d95d9f827f30a22",
+    "outputs/official-all-v2/stage-2/stage-2.counts.json": "6edc7d42b81b03606624ab2c38143073c7abd23f98ed846791b8ab91824add54",
+    "outputs/official-all-v2/stage-2/stage-2.log": "5e0f092c16f49b67f33dc93c74e8ff620dd1eb1416a52b5fe6ab95dd0a24beae",
+    "outputs/official-all-v2/stage-2/stage-3.counts.json": "fffc3d1f57c0b569f5fe902ba8dbf2589ee785f49dc8bd7caa4c99d2ce9d698f",
+    "outputs/official-all-v2/stage-2/stage-3.log": "72cf63ea820346d97f376f60712e47d9a0436b6091c3a22ecd6fefae654af1e1",
+    "outputs/official-all-v2/stage-3/report.json": "d88e843397554133f3fb366b1aed57009061bb43780c79bf307e099927ff07c6",
+    "outputs/official-all-v2/stage-3/stage-1.counts.json": "6250f0fd1251afe620a1f77f720deecc44479bd1466308da32a9204809c34546",
+    "outputs/official-all-v2/stage-3/stage-1.log": "1dfa594e3d620c56618e925fdb78086287afe701e56f7ac3dd69eca19c9fcceb",
+    "outputs/official-all-v2/stage-3/stage-2.counts.json": "6edc7d42b81b03606624ab2c38143073c7abd23f98ed846791b8ab91824add54",
+    "outputs/official-all-v2/stage-3/stage-2.log": "cd28ba3fa9ad38c0b617c4444777bd1a11227d042c6e7671f5f79125f383bb0c",
+    "outputs/official-all-v2/stage-3/stage-3.counts.json": "8241d0e80683a5feb47ba8b31953d93938cc0fe28eeb0dc92740756568e6123b",
+    "outputs/official-all-v2/stage-3/stage-3.log": "a54632db09c75506eb8543f38557b4c7736f4679b7ee5baaae002d50036405b2",
+    "outputs/official-all-v2/stage-3/stage-4.counts.json": "d8d3781bc9f0573598e44bbea7ee9797a007bd0f6236a0e744aa8eefb29c51f1",
+    "outputs/official-all-v2/stage-3/stage-4.log": "e8955fd7e7262292023ac20fb7747d4489d527a072eb51d0cd636b1b7814804f",
+    "outputs/official-all-v2/stage-4/report.json": "0bf36d9a12e59ef23c977ab0aba7becd9ee43296c0bad94697f7c1b1214573c3",
+    "outputs/official-all-v2/stage-4/stage-1.counts.json": "6250f0fd1251afe620a1f77f720deecc44479bd1466308da32a9204809c34546",
+    "outputs/official-all-v2/stage-4/stage-1.log": "1f3890388bdd11236a7b0a4c8218a1dca8037ae5f0ebc7c950e927b2919abf06",
+    "outputs/official-all-v2/stage-4/stage-2.counts.json": "6edc7d42b81b03606624ab2c38143073c7abd23f98ed846791b8ab91824add54",
+    "outputs/official-all-v2/stage-4/stage-2.log": "a07f6203625e76c6d3277ec3b34a72379eeadb38c463ee896ad73c9cbb948e17",
+    "outputs/official-all-v2/stage-4/stage-3.counts.json": "8241d0e80683a5feb47ba8b31953d93938cc0fe28eeb0dc92740756568e6123b",
+    "outputs/official-all-v2/stage-4/stage-3.log": "84a9127f90582f4e6b2fc52b5661694c00a181a1b7d49e913f4b2eb747cdea94",
+    "outputs/official-all-v2/stage-4/stage-4.counts.json": "b6bd19161d2f1f91c7e6345431076e0671030eea9965f952cc78314942ccaba6",
+    "outputs/official-all-v2/stage-4/stage-4.log": "de9aea606b7f6ae70b13f3ebf010facccc66b4638f18704e23ef2829f8872365",
+    "outputs/official-all-v2/summary.json": "d9c61a4e8ef4a0a99c51c9501f6fd12fbdd003b6b1d6713018af0a2052a49da3",
+    "outputs/official-all-v2.log": "af0d3f0173c9bbe105aafbd4b6efe8f36c452242db05903cc387096df173e063",
+    "outputs/official-all.log": "7b8e44e6cc9d63749bd87e7a514b4b845817ea1839433340ec07eabc778fc00b",
+    "outputs/official-check.log": "876975458c1bb50531592e722ebf27e0ee0842ce268bfcff3b7a92edb7ca86d4",
+    "outputs/result-checkout-policy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "outputs/result-checkout.log": "361604a179c4f968cc61cca63eda2e777b3e973c7f3d1174ad47ab1a8b35006d",
+    "outputs/result-clone.log": "4bca175f965c9df8499122c1d87ea6e5e4ccdff56b545deb079062fa0f96ec6b",
+    "controller/Dockerfile": "88a616c1f82ef219e3e32ec1a2bc6374b6c70b098880912ef6ca92785a951144",
+    "controller/run.py": "6b42b813584337f62f983c446590ac53adf5cde17aaf3889ddddbb951b61239e",
+    "controller/retry.py": "7234774e5c82ad0474c65c82107d4cf1de53b289115cb53be469f7cea74339fc"
+  }
+}
