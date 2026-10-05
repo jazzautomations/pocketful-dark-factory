@@ -1,5 +1,17 @@
 # FACTORY.md — a three-seat headless factory on band-sdk
 
+## 0. Verify it in three commands
+
+From a fresh clone, with the organiser's pinned harness (`803560d2`) in `../dark-factory-wearedevs`:
+
+```sh
+python -m harness check . --track pocketful                               # gates 1, 2 and 4: mandates, room.json, @handle exchange
+python -m harness run --track pocketful --repo . --all --mode isolated    # every stage folder, built and tested like a judge does
+python tools/factory/usage.py room.json                                   # minutes per stage, tokens per seat, rejections, from the room itself
+```
+
+Expected: `ok` from the check; `claims stage 1` … `claims stage 4` from the run; the usage table reproduced in section 4.
+
 This document is enough to stand the factory up again on a plain Linux VM and point it at a different problem. Nothing in it is specific to the track we entered; the track lives entirely in the dispatch message pasted into the room.
 
 ## 1. Shape
@@ -110,3 +122,10 @@ Cost: the seats ran on a Claude subscription, so there is no per-token invoice; 
 ## 8. Pointing it at something else
 
 Replace the dispatch text (paths, check command, folder rule). The mandates say nothing about wallets, reservations or counters; they say how a coordinator, an implementer and a reviewer work. We rehearsed on the organiser's `toy` track first: one dispatch, stage 1 accepted in two minutes, `harness check` gates 1, 2 and 4 green, before touching the real track.
+
+## 9. Docker, where it sits
+
+- Every stage folder is one Docker image built from its own `Dockerfile` (pinned multi-arch `python:3.12.7-slim-bookworm`, standard library only, nothing fetched at run time). `RUN.md` is one `docker build && docker run` line.
+- The reviewer's acceptance run is the harness in **isolated mode**: Docker internal network, no outbound access, 2 vCPU, 2 GiB, Chromium inside the runner container. That is the judges' environment, so an accepted stage was already graded the way it will be graded.
+- The implementer builds and exercises its own image before reporting, and the reviewer rebuilds from a `git archive` of the exact revision, so an image that only works from a dirty working tree cannot pass.
+- Seats themselves run on the host under Claude Code's `auto` permission mode; Docker Sandbox for seats (`sbx`) is optional in the guide and we did not use it, which is the one Docker-related gap we would close next.
