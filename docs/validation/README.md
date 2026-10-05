@@ -13,3 +13,10 @@ The original video is retained in docs/video-factory-run.mp4. The corrected deri
 Pending before final submission: maintaining the approved MIT license and third-party notices, reproducible original usage records or explicit unknown status, effective runtime/model identities, maintainer review, teammate acceptance, media uploads and actual submission receipt. Event wording requires BAND Desktop room footage; web-console equivalence remains unresolved. No missing evidence was manufactured or inserted into room.json.
 
 The project owners approved MIT licensing with copyright 2026 Jazz Automations and acarloshenrique on 4 October 2026. LICENSE and THIRD_PARTY_NOTICES.md implement that approval. The factory setup now documents the legacy MCP client API compatibility bound; this is a post-run reproduction correction, not an assertion of the original installed dependency versions.
+
+
+## Additional run-1 comparison baseline — 5 October 2026
+
+The existing supplementary spec-attack suite passed 35/35 tests against the frozen stage-4 application, with zero failures, errors or skips. This is a post-run independent observation, not a seat review or a new event in the original room. The cached service image was used only after source verification and then reverified by immutable image ID: app.py and all three static files match the frozen run-1 sources. The service used 2 vCPU / 2 GiB on an internal Docker network with no host port, separate disposable state, and was removed along with its network afterward.
+
+[spec-attack-run1-20261005.zip](spec-attack-run1-20261005.zip) retains the exact tested probe source and its SHA-256, raw pytest output, JUnit counts, execution receipt, image identity and source verification. The test credentials are disposable fixture values, not provider credentials. These probes are partial, principally stage 1 and a few stage-4 boundaries; they are not a complete stage-3/4 clause matrix, full upgrade verification, official harness receipt or hidden-test certification. Do not add the 35 to the 710 and describe the total as official checks. Use the same frozen probes for candidate comparison.
