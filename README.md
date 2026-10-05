@@ -4,6 +4,14 @@ Team: Felipe Salvego (Jazz Automations) and Carlos Henrique. Track: **pocketful*
 
 Everything under `stage-1/` … `stage-4/` was written by the three Band seats in the room recorded in `room.json`, from one human dispatch, with no human message afterwards. The humans wrote this file, `FACTORY.md` and the mandates.
 
+## The factory at a glance
+
+![Architecture: one dispatch, three headless seats, Docker + harness, what gets submitted](docs/diagrams/architecture.svg)
+
+![One stage through the factory: handoff, build, independent review, accept or reject](docs/diagrams/stage-flow.svg)
+
+![The submitted run minute by minute, tokens per seat, room evidence](docs/diagrams/timeline.svg)
+
 ## How to read this repository
 
 | Path | What it is |
@@ -14,6 +22,8 @@ Everything under `stage-1/` … `stage-4/` was written by the three Band seats i
 | `stage-N/` | The service as accepted at stage N: `Dockerfile`, `RUN.md`, source. Each folder builds and runs on its own |
 | `tools/factory/` | `seat.py`, `start.sh`, `dispatch.py`, `usage.py`: the scripts that ran the seats and measured the run |
 | `docs/dispatch.txt` | The single human dispatch, verbatim |
+| `docs/diagrams/` | Architecture, stage flow and run timeline (SVG + PNG) |
+| `docs/video-factory-run.mp4`, `docs/slides.pdf` | Submission video and slides |
 
 ## Run a stage
 

@@ -18,6 +18,8 @@ This document is enough to stand the factory up again on a plain Linux VM and po
 
 Three seats, one room, one dispatch.
 
+![Architecture](docs/diagrams/architecture.svg)
+
 | Seat | Owns | Harness | Model |
 |---|---|---|---|
 | `coordinator` | scope, sequencing, complete handoffs, acceptance, reporting | Claude Code (headless, via `band-sdk` `ClaudeSDKAdapter`) | `claude-sonnet-5-5` |
@@ -66,6 +68,8 @@ Each seat commits under its own git identity, so the history shows who did what 
 
 ## 3. Running a job
 
+![One stage through the factory](docs/diagrams/stage-flow.svg)
+
 ```sh
 tools/factory/start.sh <dir with mandates/> <absolute result repo>     # starts the three seats (nohup, one log each)
 tools/factory/dispatch.py <room id> <dispatch.txt>                     # one message, mentions only the coordinator
@@ -74,6 +78,8 @@ tools/factory/dispatch.py <room id> <dispatch.txt>                     # one mes
 The dispatch is the only human input. Ours named the track, the absolute paths of the specifications and the result repository, the check command, the folder-per-stage rule and the acceptance flow, and told the coordinator to run all four stages in order. After that we read the room and did nothing else.
 
 ## 4. What the room shows (the run we submit)
+
+![Timeline of the submitted run](docs/diagrams/timeline.svg)
 
 Measured from `room.json` (every number below is in the file; `tools/factory/usage.py` recomputes them):
 

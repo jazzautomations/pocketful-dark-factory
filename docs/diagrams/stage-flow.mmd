@@ -1,0 +1,23 @@
+flowchart TB
+    classDef human fill:#fff3cd,stroke:#b8860b,stroke-width:2px,color:#3a2a00
+    classDef coord fill:#d7f0ea,stroke:#1f7a68,stroke-width:1.5px,color:#0b1f2a
+    classDef impl fill:#e3f1f5,stroke:#2c5566,stroke-width:1.5px,color:#0b1f2a
+    classDef rev fill:#eef2f5,stroke:#5c7a88,stroke-width:1.5px,color:#0b1f2a
+    classDef dec fill:#fdf6e3,stroke:#b8860b,stroke-width:2px,color:#3a2a00
+    classDef bad fill:#fde2e0,stroke:#c0392b,stroke-width:1.5px,color:#3a0a05
+
+    D0["Human dispatch, once<br/>track, paths, check command, all four stages"]:::human
+    C1["coordinator: implementation handoff<br/>full task + spec 1..N verbatim, numbered parts if long"]:::coord
+    I1["implementer<br/>copy stage N-1 to stage N, build to the spec not the samples<br/>docker build + host-mode harness run, commit, report full hash"]:::impl
+    C2["coordinator: review handoff<br/>same full task + spec, exact hash, repo path, check command"]:::coord
+    V1["reviewer<br/>git archive of the exact revision, docker build + RUN.md<br/>harness run --mode isolated with a fresh --out<br/>probes the samples never ask: races, rounding, precedence, restarts, earlier stages"]:::rev
+    Q{"claimed stage N<br/>and every requirement probed?"}:::dec
+    A["ACCEPT: hash, commands, counts"]:::coord
+    X["REJECT: command, expected, observed, spec clause"]:::bad
+    C3["coordinator: stage outcome to the owner<br/>revision, coverage, commands, remaining uncertainty"]:::coord
+    N["next stage: same loop, new folder copied from the accepted one"]:::human
+
+    D0 --> C1 --> I1 -- "commit hash" --> C2 --> V1 --> Q
+    Q -- yes --> A --> C3 --> N
+    Q -- no --> X -- "fix, new hash, review again" --> I1
+    N -. "stages 2, 3 and 4" .-> C1
