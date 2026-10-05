@@ -1,10 +1,16 @@
 # FACTORY.md — a three-seat headless factory on band-sdk
 
+## 0. Verify in three commands
+
+Use the three commands in [README.md](README.md#verify-in-three-commands), from the pinned harness checkout with its dependencies installed and Docker running. They include a clean review-branch clone and a fresh isolated output directory. The checker does not build stages; the exact all-stage CLI attempt and the separately reproduced 710 shipped checks have distinct receipts.
+
+For a separate room audit, run `python tools/factory/usage.py room.json`. On this export it reports event counts/timing and unknown token usage, with exit status 0 for a successful structural audit. Its `usage.status` remains `unavailable`; process success does not mean tokens were measured. It cannot reproduce the operator-reported token table.
+
 This document is enough to stand the factory up again on a plain Linux VM and point it at a different problem. Nothing in it is specific to the track we entered; the track lives entirely in the dispatch message pasted into the room.
 
 ## 1. Shape
 
-Three seats, one room, one dispatch.
+Three seats, one room, one dispatch. See the [reviewed architecture and room timeline](docs/diagrams/README.md); the operator-supplied diagram exports are retained separately as unverified illustrations.
 
 | Seat | Owns | Harness | Configured model |
 |---|---|---|---|
@@ -124,3 +130,13 @@ Before final submission, the maintainers must confirm documentation authorship a
 Independent reproduction reports, room timing audit and corrected-media provenance are in [docs/validation](docs/validation/README.md). Original media is retained alongside corrected review derivatives.
 
 The launcher was repaired after the run to use the adjacent seat.py, the documented band-venv, quoted paths and preflight checks for all three mandates and identities. These repairs are not evidence of the exact launcher used during the scored run. Launcher tests cover preflight behavior without starting workers; a fresh end-to-end factory run has not been performed with this revision.
+
+## 10. Docker and independent validation
+
+Each frozen stage has its own Dockerfile and RUN.md. The base image tag is `python:3.12.7-slim-bookworm`; a tag is not a digest pin. The application uses the standard library and needs no runtime dependency download.
+
+The independent supplementary reproduction used separate stage images, Docker internal runtime networking and the official 2 vCPU / 2 GiB service limits. It used genuine previous-stage services for populated exports and upgrades. Build-time dependency installation can require network access. The exact official all-stage command independently attempted here failed during runner dependency setup before test collection; that failure is preserved separately.
+
+The room contains reviewer isolated-run reports and revision-based handoffs. Neither those reports nor public-suite counts establish complete clause coverage, hidden-test results or a judging score. Acceptance on first review is legitimate and is not a missing rejection quota.
+
+Provider seats were reported as host processes using Claude Code AUTO permission mode. Service-container isolation does not establish agent sandboxing. The launcher repair and local preflight tests were performed after the run; they do not prove the original seats were started with this repaired launcher.

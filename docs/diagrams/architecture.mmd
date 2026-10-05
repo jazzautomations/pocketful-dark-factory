@@ -1,0 +1,35 @@
+flowchart TB
+    classDef human fill:#fff3cd,stroke:#b8860b,stroke-width:2px,color:#3a2a00
+    classDef band fill:#d7f0ea,stroke:#1f7a68,stroke-width:2px,color:#0b1f2a
+    classDef seat fill:#e3f1f5,stroke:#2c5566,stroke-width:1.5px,color:#0b1f2a
+    classDef infra fill:#eef2f5,stroke:#5c7a88,stroke-width:1.5px,color:#0b1f2a
+    classDef out fill:#fdf6e3,stroke:#b8860b,stroke-width:1.5px,color:#3a2a00
+
+    H["Human owner<br/>dispatch.py sends ONE message<br/>mentioning @coordinator only"]:::human
+    R["Band room at app.band.ai<br/>addressed messages, tool-call and usage events<br/>Download full session = room.json"]:::band
+
+    subgraph VM["Linux VM on Oracle Cloud, 4 vCPU / 5.8 GiB - no Band Desktop, no GPU, no human"]
+        direction TB
+        C["coordinator - Claude Code, claude-sonnet-5-5<br/>seat.py via band-sdk ClaudeSDKAdapter<br/>scope, complete handoffs, acceptance"]:::seat
+        I["implementer - Claude Code, claude-opus-5-5<br/>seat.py via band-sdk ClaudeSDKAdapter<br/>copy stage forward, build, self-check, commit"]:::seat
+        V["reviewer - Claude Code, claude-opus-5-5<br/>seat.py via band-sdk ClaudeSDKAdapter<br/>git archive of the exact revision, isolated harness, probes, verdict"]:::seat
+        D["Docker + official harness, pinned 803560d2<br/>one image per stage, harness run --mode isolated<br/>internal network, no egress, 2 vCPU / 2 GiB: the judges' setup"]:::infra
+        G["Result repository, fresh and empty at dispatch<br/>stage-1 ... stage-4, each with Dockerfile + RUN.md<br/>4 ordinary commits by implementer, frozen after acceptance"]:::infra
+    end
+
+    O["What gets submitted (public GitHub repo)<br/>room.json: 556 messages, 3 seats, 1 human message<br/>mandates: generic, Harness + Model lines<br/>stage-1 ... stage-4: 147/147, 35/35, 6/6, 5/5 isolated<br/>FACTORY.md + tools/factory: 15 min setup, 76 min, ~$176"]:::out
+
+    H -- "1 dispatch" --> R
+    R <-- "WebSocket per seat, only messages that mention it" --> C
+    R <--> I
+    R <--> V
+    C -- "handoff: full task + full spec" --> I
+    C -- "review handoff with the exact hash" --> V
+    V -- "ACCEPT or REJECT with evidence" --> C
+    I -- "commits" --> G
+    I -- "docker build, host-mode run" --> D
+    V -- "isolated run on the exact revision" --> D
+    D -. "builds from" .-> G
+    R -- "Download full session" --> O
+    G -- "stage folders" --> O
+    C -- "stage reports; the owner never replies" --> R

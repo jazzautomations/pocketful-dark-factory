@@ -1,0 +1,31 @@
+{
+  "kind": "post_run_documentation_review",
+  "observed_at": "2026-10-05T12:31:43.103618+00:00",
+  "upstream_revision": "d11226f0f5e82f05fb9d598065dde4c9a745185e",
+  "previous_review_revision": "8c2a7ad8eb3ae8938f09d2d28e303927a71e0f77",
+  "frozen_product_source_revision": "10420119704d374f39452573694d3b1c579e54d0",
+  "room_sha256": "c1f57d26e77ff634d8bf6463474a9eafcbe5a3990f5a447c33e9e2cca982386b",
+  "stage_source_mandates_room_unchanged": true,
+  "original_operator_media_and_diagrams_retained": true,
+  "reviewed_markdown_links": "PASS",
+  "script_tests": {
+    "passed": 9,
+    "scope": "usage reader and launcher preflight; no workers started"
+  },
+  "official_check": {
+    "harness_revision": "803560d2a678ace1414465c098eb0ab5380ffade",
+    "status": "PASS",
+    "gates": [
+      "1",
+      "2",
+      "mandate part of 4"
+    ],
+    "gate_3_not_checked": true,
+    "windows_initial_attempt": "FAILED decoding room.json with default charmap; original export unchanged",
+    "retry": "PYTHONUTF8=1; exit 0"
+  },
+  "new_product_test_run": false,
+  "tokens_independently_measured": false,
+  "final_submission_sent": false,
+  "maintainer_review": "PENDING"
+}

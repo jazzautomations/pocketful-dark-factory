@@ -4,6 +4,10 @@ Team: Felipe Salvego (Jazz Automations) and Carlos Henrique. Track: **pocketful*
 
 Everything under `stage-1/` … `stage-4/` was written by the three Band seats in the room recorded in `room.json`, from one human dispatch, with no human message afterwards. These documentation files and mandates were prepared separately from the generated stage source. This branch is a documentation and evidence review; maintainer review is pending.
 
+## The factory at a glance
+
+[Reviewed architecture, acceptance flow and recorded timeline](docs/diagrams/README.md) distinguish observed room facts from intended gates and unverified operator estimates. Original diagram exports are retained for provenance; their labels are not measurement receipts.
+
 ## How to read this repository
 
 | Path | What it is |
@@ -14,6 +18,8 @@ Everything under `stage-1/` … `stage-4/` was written by the three Band seats i
 | `stage-N/` | The service as accepted at stage N: `Dockerfile`, `RUN.md`, source. Each folder builds and runs on its own |
 | `tools/factory/` | `seat.py`, `start.sh`, `dispatch.py`, `usage.py`: seat orchestration and audit scripts; see FACTORY.md for usage-data limits |
 | `docs/dispatch.txt` | The single human dispatch, verbatim |
+| `docs/diagrams/` | Reviewed Markdown diagrams and retained operator-supplied draw.io/SVG/PNG originals |
+| `docs/video-factory-run.mp4`, `docs/slides.pdf` | Operator-supplied original media; see Reviewed media for corrected review derivatives and eligibility limits |
 
 ## Run a stage
 

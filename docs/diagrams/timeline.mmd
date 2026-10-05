@@ -1,0 +1,16 @@
+gantt
+    title Submitted run - 2026-10-04 - dispatch 20:51 UTC, final report 22:07 UTC (76 min, 0 rejections, 0 human messages)
+    dateFormat HH:mm
+    axisFormat %H:%M
+    section Stage 1 - API
+    implement + host checks (147/147)      :s1a, 20:51, 10m
+    independent review, isolated 147/147   :s1b, after s1a, 14m
+    section Stage 2 - UI + holds
+    implement (copy of stage 1 + spec 2)   :s2a, after s1b, 12m
+    review, isolated 147/147 + 35/35 + UI probes :s2b, after s2a, 9m
+    section Stage 3 - corrections
+    implement (copy of stage 2 + spec 3)   :s3a, after s2b, 11m
+    review, isolated 147/147 + 35/35 + 6/6 :s3b, after s3a, 6m
+    section Stage 4 - refunds
+    implement (copy of stage 3 + spec 4)   :s4a, after s3b, 7m
+    review, isolated + 5/5, final report   :s4b, after s4a, 7m
