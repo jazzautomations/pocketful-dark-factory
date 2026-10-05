@@ -1,0 +1,48 @@
+{
+  "kind": "lablab_draft_ui_observation_not_submission_receipt",
+  "observed_at": "2026-10-05T12:37:50.495965+00:00",
+  "source": "BAND hackathon team page and lablab draft accessed through CUA accessibility state; media cover also visually inspected",
+  "team_url": "https://lablab.ai/ai-hackathons/wearedevelopers-hackathon/vibe-smokes",
+  "submission_url": "https://lablab.ai/ai-hackathons/wearedevelopers-hackathon/vibe-smokes/submission",
+  "team_name": "Vibe Smokes",
+  "visible_members": [
+    "carlosanissilva20604",
+    "jazzautomations466"
+  ],
+  "selected_track": "Pocketful",
+  "team_submission_status": "Submission draft in progress",
+  "basic_information": {
+    "title": "Pocketful \u2014 Payments Built by a BAND Factory",
+    "language": "English",
+    "short_description_chars": 192,
+    "long_description_chars": 1606,
+    "categories": [
+      "Developer Tools",
+      "Finance"
+    ],
+    "technologies": [
+      "Claude Code",
+      "Band Agentic Mesh",
+      "Anthropic Claude"
+    ],
+    "values_observed_saved_in_existing_draft": true
+  },
+  "media": {
+    "step": 2,
+    "steps_total": 3,
+    "progress_percent": 53,
+    "cover": "empty_upload_area_visible",
+    "video": "existing_player_and_Change_file_control_visible; current playback buffered; file identity not independently revalidated",
+    "slides": "Upload file control visible; no attached PDF confirmed"
+  },
+  "remaining_form_fields": "Step 3 not inspected in this observation",
+  "deadline": {
+    "team_timer_observed": "0 D 18 H 25 M TIME LEFT",
+    "absolute_deadline": "not independently confirmed with organisers"
+  },
+  "actions": "navigation only; no field editing, upload, invitation or final submission performed",
+  "screenshot_saved": false,
+  "final_submission_hold": true,
+  "new_upload_permission": "requested after earlier denial; response pending",
+  "final_submission_receipt": "not present"
+}

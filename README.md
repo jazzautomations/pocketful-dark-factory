@@ -47,7 +47,7 @@ python -m harness run --track pocketful --repo <clone> --all --mode isolated
 
 A separate supplementary reproduction at result revision `1042011`, with unchanged organiser suites at `803560d2`, passed all 710 required checks with no failure, error or skip. The three next-stage overshoot probes failed as expected. Services ran in an internal Docker network with the official 2 CPU / 2 GiB limits, and upgrade tests used the genuine preceding stage service. This is not a receipt for the exact official all-stage CLI command. The logs and provenance are in [docs/validation](docs/validation/README.md). Shipped checks do not establish hidden-test coverage or a judging score.
 
-Reviewer rejections: 0. Human messages after dispatch: 0. Recorded timing, reported usage estimates and their limits are in `FACTORY.md`. Final team registration and submission are not established by this repository.
+Reviewer rejections: 0. Human messages after dispatch: 0. Recorded timing, reported usage estimates and their limits are in `FACTORY.md`. The [lablab draft observation](docs/validation/lablab-draft-observation-20261005.json) confirms Carlos and Felipe as visible team members in the Pocketful track. The form remains a draft with missing cover/slides; no final submission receipt is established.
 
 
 ## Reviewed media
