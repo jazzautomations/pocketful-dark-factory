@@ -52,3 +52,20 @@ The original video and slides remain in docs/. The corrected [video](docs/video-
 ## License
 
 Project source is licensed under [MIT](LICENSE), with copyright 2026 Jazz Automations and acarloshenrique. Separately installed runtimes and provider tools retain their own licenses and terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+
+## Verify in three commands
+
+Prerequisites: Git, Python 3.12+ with the organiser harness dependencies installed in the active environment, a running Docker daemon, and the harness checkout pinned to `803560d2a678ace1414465c098eb0ab5380ffade`. Run these commands from that harness checkout. Installation and recording/provider setup are separate prerequisites, not hidden inside the command count.
+
+For this review candidate (the documentation branch is still awaiting maintainer review):
+
+```sh
+git clone --branch codex/evidence-review-20261004 https://github.com/jazzautomations/pocketful-dark-factory.git result-review
+python -m harness check result-review --track pocketful
+python -m harness run --track pocketful --repo result-review --all --mode isolated --out runs/result-review-fresh
+```
+
+Use a clean clone and fresh output directory, record the checked Git revision, and read the required-suite reports and exit status. On Windows follow the pinned guide’s supported isolated/WSL setup and UTF-8 handling. The checker alone does not verify stage builds. The exact all-stage command independently attempted here failed during runner dependency setup; the 710 passed checks are a separately labelled isolated reproduction of unchanged shipped suites, not a receipt for this exact command or hidden-test certification.
+
+Each stage is built from its own `Dockerfile` into a separate service image. The harness applies the official 2 vCPU / 2 GiB service limits and internal runtime network, and uses genuine preceding-stage services for populated-state upgrades. Build-time installation may require network access; runtime service isolation does not imply the provider agents themselves were sandboxed.
